@@ -2,7 +2,7 @@ use rand::Rng;
 
 fn guess_number(number: i32) -> bool {
     if !(1..101).contains(&number) {
-        panic!("The number you enterest must be in valid ranges. Valid ranges are: 1-100");
+        panic!("The number you entered must be in valid ranges. Valid ranges are: 1-100");
     }
 
     let random_number: i32 = rand::thread_rng().gen_range(1..101);
@@ -11,17 +11,32 @@ fn guess_number(number: i32) -> bool {
 }
 
 fn main() {
-    println!("Pleas guess a number!");
+    println!("Gues the number :)");
+
+    loop {
+        println!("Pleas guess a number!");
+
+        // currently we didn't implement dynamic value from stdin.
+
+        let result = guess_number(11);
+
+        if result {
+            println!("You're right :P");
+
+            break;
+        } else {
+            println!("So close :/");
+        }
+    }
 }
 
 
 #[cfg(test)]
 mod tests {
-    use std::any::type_name;
     use crate::guess_number;
 
     #[test]
-    #[should_panic(expected = "The number you enterest must be in valid ranges")]
+    #[should_panic(expected = "The number you entered must be in valid ranges")]
     fn is_number_in_valid_ranges() {
         guess_number(-1);
     }
