@@ -57,9 +57,29 @@ fn mutable_integer_value(number: i32) -> i32 {
     return default_rate * default_value;
 }
 
+fn shadowing(number: i32) -> i32 {
+    let x = 5;
+
+    {
+        let x = number * x;
+
+        println!("X: {}", x);
+    }
+
+    return x;
+}
+
 #[cfg(test)]
 mod tests {
-    use crate::{float_value, integer_value, mutable_float_value, mutable_integer_value, mutable_string_value, string_value};
+    use crate::{
+        float_value, integer_value, mutable_float_value, mutable_integer_value,
+        mutable_string_value, shadowing, string_value,
+    };
+
+    #[test]
+    fn test_shadowing() {
+        assert_eq!(shadowing(2), 5);
+    }
 
     #[test]
     fn test_mutable_string() {
