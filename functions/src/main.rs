@@ -11,12 +11,10 @@ fn hello_rust() {
 }
 
 fn formatted_fn(age: i32) -> String {
-
     return format!("I'm {} yo", age);
 }
 
 fn scope_value_in_funtion(number: i32) -> i32 {
-
     // This is a scope example. So we can say my_age never exists actually
     // :P not like that but actual body don't know :)
     let age = {
@@ -42,23 +40,38 @@ fn hey_this_function_will_panic() {
 
 #[cfg(test)]
 mod tests {
-    use crate::{a_float_function_without_return_keyword, formatted_fn, hey_this_function_will_panic, scope_value_in_funtion};
+    use crate::{
+        a_float_function_without_return_keyword, formatted_fn, hey_this_function_will_panic,
+        scope_value_in_funtion,
+    };
 
     #[test]
     fn function_should_return_formatted_string() {
         let my_age = 29;
 
-        assert_eq!(formatted_fn(my_age), "I'm 29 yo", "string returned than expected");
+        assert_eq!(
+            formatted_fn(my_age),
+            "I'm 29 yo",
+            "string returned than expected"
+        );
     }
 
     #[test]
     fn function_return_value_from_scope() {
-        assert_eq!(scope_value_in_funtion(9), 29, "Values aren't matched properly");
+        assert_eq!(
+            scope_value_in_funtion(9),
+            29,
+            "Values aren't matched properly"
+        );
     }
 
     #[test]
     fn function_return_value_without_return_keyword() {
-        assert_eq!(a_float_function_without_return_keyword(), 12.5, "Value seems to be wrong");
+        assert_eq!(
+            a_float_function_without_return_keyword(),
+            12.5,
+            "Value seems to be wrong"
+        );
     }
 
     #[test]
