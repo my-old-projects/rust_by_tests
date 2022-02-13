@@ -95,11 +95,17 @@ fn this_program_wont_compile_because_of_this_function() -> String {
 
 #[cfg(test)]
 mod tests {
-    use crate::{add_surname, borrow_your_pen_to_your_classmate, get_size_of_string_with_immutable_param, mutate_borrowed_item, reference_str, this_program_wont_compile_because_of_this_function};
+    use crate::{
+        add_surname, borrow_your_pen_to_your_classmate, get_size_of_string_with_immutable_param,
+        mutate_borrowed_item, reference_str, this_program_wont_compile_because_of_this_function,
+    };
 
     #[test]
     fn test_this_program_wont_compile_because_of_this_function() {
-        assert_eq!(this_program_wont_compile_because_of_this_function(), "Name1: NASA, Name2: NASA");
+        assert_eq!(
+            this_program_wont_compile_because_of_this_function(),
+            "Name1: NASA, Name2: NASA"
+        );
     }
 
     #[test]
