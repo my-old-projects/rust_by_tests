@@ -24,12 +24,62 @@ fn get_string_length(s: &String) -> usize {
     return s.len();
 }
 
-//TODO: Write more tests! You need to understand this topic better!
+fn iterate_and_break(index: usize, message: &String) -> char {
+    let bytes = message.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if i == index {
+            return item as char;
+        }
+    }
+
+    return bytes[0] as char;
+}
+
+fn first_character_of_name(index: usize, name: &String) -> char {
+    return name.as_bytes()[index] as char;
+}
+
+fn get_second_character_of_name(index: usize, name: &String) -> char {
+    return name.as_bytes()[index] as char;
+}
+
 #[cfg(test)]
 mod tests {
     use crate::{
-        clean_string, get_characters_after_given_index, get_first_character, get_string_length,
+        clean_string, first_character_of_name, get_characters_after_given_index,
+        get_first_character, get_second_character_of_name, get_string_length, iterate_and_break,
     };
+
+    #[test]
+    fn test_get_second_character_of_name() {
+        let index: usize = 1;
+        let name = &String::from("John");
+        assert_eq!(
+            get_second_character_of_name(index, &name),
+            'o',
+            "Chars didn't match"
+        );
+    }
+
+    #[test]
+    fn test_first_character_of_name() {
+        let index: usize = 0;
+        let name = &String::from("John");
+
+        assert_eq!(
+            first_character_of_name(index, &name),
+            'J',
+            "Chars didn't match"
+        );
+    }
+
+    #[test]
+    fn test_iterate_and_break() {
+        let message = &String::from("Hello world!");
+
+        assert_eq!(iterate_and_break(2, &message), 'l', "chars didn't match");
+    }
 
     #[test]
     fn test_get_string_length() {
