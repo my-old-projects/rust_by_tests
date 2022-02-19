@@ -17,6 +17,20 @@ fn main() {
     println!("{:?}", user);
 
     dbg!(user);
+    /*
+    [src\main.rs:19] user = User {
+            username: "yazilimci_adam",
+            password: "123456",
+            name: "Bug Skywalker",
+            social: [
+                SocialProfile {
+                    provider: "github",
+                    icon: "github.svg",
+                    social_url: "https://github.com/aligoren",
+                },
+            ],
+        }
+    */
 }
 
 #[derive(Debug)]
