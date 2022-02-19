@@ -6,17 +6,17 @@ struct User {
     username: String,
     password: String,
     email: String,
-    birth_year: i32
+    birth_year: i32,
 }
 
 impl User {
     fn new(username: String, password: String, email: String, birth_year: i32) -> User {
-        return User  {
+        return User {
             username,
             password,
             email,
-            birth_year
-        }
+            birth_year,
+        };
     }
 
     fn get_age(&self, current_year: i32) -> i32 {
@@ -24,7 +24,11 @@ impl User {
     }
 
     fn is_registered(&self) -> bool {
-        if self.email == "goren.ali@yandex.com" { true } else { false }
+        if self.email == "goren.ali@yandex.com" {
+            true
+        } else {
+            false
+        }
     }
 }
 
@@ -43,7 +47,11 @@ mod tests {
 
         let check_user_status = user.is_registered();
 
-        assert_eq!(check_user_status, true, "You expected true. But result is different {}", check_user_status);
+        assert_eq!(
+            check_user_status, true,
+            "You expected true. But result is different {}",
+            check_user_status
+        );
     }
 
     #[test]
@@ -70,6 +78,5 @@ mod tests {
         let user = User::new(username, password, email, birth_year);
 
         assert_eq!(user.birth_year, 1993, "Birth years didn't match");
-
     }
 }
