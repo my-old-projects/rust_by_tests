@@ -1,39 +1,54 @@
-// TODO: I didn't understand this topic. I know how this section work.
-// TODO: But I need to understand clearly.
-// TODO: Check this document ../.rustup/toolchains/stable-x86_64-pc-windows-msvc/share/doc/rust/html/book/ch06-03-if-let.html
-// TODO: Make more practices :)
+/*
+I asked a question about this section;
+https://users.rust-lang.org/t/understanding-if-let-statement/72612/3
+
+Now, I really know how this syntax works :)
+*/
 
 fn main() {
     println!("Hello, world!");
 
-    let user_permission_id: Option<i32> = Some(1520);
+    let admin = is_admin(Some(Permissions {
+        admin: true,
+        user_id: 1,
+    }));
 
-    user_has_mod_permissions(user_permission_id);
-
+    println!("Is admin {}", admin);
 }
 
-// I think this section is not working as I expected from my side.
-fn age_should_be_bigger_than_legal_age(_user_age: Option<i32>) -> String {
-    let age: Option<i32> = Some(18);
 
-    if let Some(_user_age) = age {
-        return format!("Age is not verified {}", _user_age.to_string());
-    }
-
-    return format!("Age verified");
+struct Permissions {
+    user_id: i32,
+    admin: bool,
 }
 
-// This also works wrong.
-fn user_has_mod_permissions(_permissions_id: Option<i32>) -> bool {
-    let mod_permission_id: Option<i32> = Some(1521);
+// now i understand how this work.
+// i'll try to explain this block by block
+/*
+    if -> this is normal if statement
+        let -> we're saying that we'll create a variable
+            Some(not_exist) -> create a variable called not_exist
+                = -> not_exist variable is coming from
+                    permission -> this variable hold a data
 
-    println!("ID {}", _permissions_id.unwrap().to_string());
+     Let's try this in human language.
 
-    if let Some(_permissions_id) = mod_permission_id {
-        return true;
+     If permission variable has a value, create not_exist variable and use it if you want, if not exist? you can't use it use anything else
+*/
+fn is_admin(permission: Option<Permissions>) -> bool {
+    if let Some(not_exist) = permission {
+        return not_exist.admin;
     }
 
-    return false;
+    false
+}
+
+fn is_odd(number: Option<i32>) -> bool {
+    if let Some(x) = number {
+        return x % 2 == 1
+    }
+
+    false
 }
 
 #[cfg(test)]
@@ -41,14 +56,25 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_for_user_has_mod_permissions() {
-        let user_permission_id: Option<i32> = Some(1520);
-        assert_eq!(user_has_mod_permissions(user_permission_id), true, "User has no mod permissions");
+    fn test_is_not_odd() {
+        assert_eq!(is_odd(Some(2)), true, "Number is not odd");
     }
 
     #[test]
-    fn test_for_legal_age() {
-        let age: Option<i32> = Some(18);
-        assert_eq!(age_should_be_bigger_than_legal_age(age), format!("Age is not verified {}", age.unwrap().to_string()));
+    fn test_is_odd() {
+        assert_eq!(is_odd(Some(3)), true, "Number is not odd");
+    }
+
+    #[test]
+    fn test_is_not_admin() {
+        assert_eq!(is_admin(None), false, "This function expects return a boolean value");
+    }
+
+    #[test]
+    fn test_is_admin() {
+        assert_eq!(is_admin(Some(Permissions {
+            admin: true,
+            user_id: 1
+        })), true, "This function expects return a boolean value");
     }
 }
