@@ -1,4 +1,4 @@
-// source: /.rustup/toolchains/stable-x86_64-pc-windows-msvc/share/doc/rust/html/book/ch06-02-match.html
+// source: /.rustup/toolchains/stable-x86_64-pc-windows-msvc/share/doc/rust/html/book/ch07-02-defining-modules-to-control-scope-and-privacy.html
 
 mod network_configs {
     pub mod card {
