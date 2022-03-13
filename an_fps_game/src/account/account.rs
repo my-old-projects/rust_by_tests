@@ -25,3 +25,32 @@ impl User  {
 }
 
 // TODO: Add tests
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_for_login_success() {
+        let user = User {
+            username: String::from("verystronguser"),
+            password: String::from("thisisalsoverystrongpassword")
+        };
+
+        let login_response = user.login();
+
+        assert_eq!(login_response.success, true, "User is not logged in");
+    }
+
+    #[test]
+    fn test_for_login_fail() {
+        let user = User {
+            username: String::from("verystronguser"),
+            password: String::from("thisisalsoverystrongpassword")
+        };
+
+        let login_response = user.login();
+
+        assert_ne!(login_response.success, true, "User should not be logged in");
+    }
+}
