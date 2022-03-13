@@ -3,12 +3,13 @@ use crate::models::response::Response;
 #[derive(Debug)]
 pub struct User {
     pub username: String,
-    pub password: String
+    pub password: String,
 }
 
-impl User  {
+impl User {
     fn is_username_and_password_valid(&self) -> bool {
-        self.username == String::from("opcode") && self.password == String::from("veryverystrongpassword")
+        self.username == String::from("opcode")
+            && self.password == String::from("veryverystrongpassword")
     }
 
     pub fn register(&self) -> String {
@@ -17,14 +18,20 @@ impl User  {
 
     pub fn login(&self) -> Response {
         Response {
-            status_code: if self.is_username_and_password_valid() { 200 } else { 404 },
+            status_code: if self.is_username_and_password_valid() {
+                200
+            } else {
+                404
+            },
             success: self.is_username_and_password_valid(),
-            message: if self.is_username_and_password_valid() { String::from("Login successfully") } else { String::from("Wrong username or password") }
+            message: if self.is_username_and_password_valid() {
+                String::from("Login successfully")
+            } else {
+                String::from("Wrong username or password")
+            },
         }
     }
 }
-
-// TODO: Add tests
 
 #[cfg(test)]
 mod tests {
@@ -34,7 +41,7 @@ mod tests {
     fn test_for_login_success() {
         let user = User {
             username: String::from("verystronguser"),
-            password: String::from("thisisalsoverystrongpassword")
+            password: String::from("thisisalsoverystrongpassword"),
         };
 
         let login_response = user.login();
@@ -46,7 +53,7 @@ mod tests {
     fn test_for_login_fail() {
         let user = User {
             username: String::from("verystronguser"),
-            password: String::from("thisisalsoverystrongpassword")
+            password: String::from("thisisalsoverystrongpassword"),
         };
 
         let login_response = user.login();
